@@ -1,23 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from 'react';
+import useDrivePicker from 'react-google-drive-picker';
 
 function App() {
+  const [openPicker, data, authResponse] = useDrivePicker();
+
+  const handleOpenPicker = () => {
+    openPicker({
+      clientId:
+        '301408928475-0n8evjvagpagt2mkna4499di8a7v2qi1.apps.googleusercontent.com',
+      developerKey: 'AIzaSyDbAkIwa3h1L7GvX-cYJFRw2_Z_52m3NzA',
+      token:
+        'ya29.A0ARrdaM8vCDXuOLgEoobNilaidfXVhW6gDCTPgw8RAKYbFZOS4s43fwcpmklRqg3k_pYQfcCS3nahrxYKPo3USbgmJvQ6hwdOoLD6FekWQCTw_0ds7uxV_lJocdKAmJ5a6DhTSwuc0CX6B73zEYcoIJ00JXBW',
+      viewId: 'DOCS',
+      showUploadView: true,
+      showUploadFolders: true,
+      supportDrives: true,
+      multiselect: true,
+    });
+  };
+
+  useEffect(() => {
+    if (data) {
+      data.docs.map((i) => console.log(i));
+    }
+  }, [data]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <button onClick={() => handleOpenPicker()}>Open Picker</button>
     </div>
   );
 }
