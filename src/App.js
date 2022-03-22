@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import useDrivePicker from 'react-google-drive-picker';
 
 function App() {
-  const [openPicker, data, authResponse] = useDrivePicker();
+  const [openPicker, data] = useDrivePicker();
 
   const handleOpenPicker = () => {
     openPicker({
